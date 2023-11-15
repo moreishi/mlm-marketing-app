@@ -19,7 +19,7 @@ class LoginFormRequest extends FormRequest
             return true;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class LoginFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required',
+            'email' => 'required|string|email|email:strict|max:255',
             'password' => 'required'
         ];
     }

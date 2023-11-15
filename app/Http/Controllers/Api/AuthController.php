@@ -7,17 +7,22 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegisterFormRequest;
 use App\Http\Requests\LoginFormRequest;
 use App\DTO\RegisterDTO;
+use App\DTO\LoginDTO;
 
 use App\Services\RegisterService;
+use App\Services\LoginService;
+
 
 class AuthController extends Controller
 {
 
     public $registerService;
+    public $loginService;
 
-    public function __construct(RegisterService $registerService)
+    public function __construct(RegisterService $registerService, LoginService $loginService)
     {
         $this->registerService = $registerService;
+        $this->loginService = $loginService;
     }
 
     public function register(RegisterFormRequest $request)
@@ -33,8 +38,14 @@ class AuthController extends Controller
         return $this->registerService->create($registerDTO);
     }
 
-    public function login(Request $request)
+    public function login(LoginFormRequest $request)
     {
-        return $request->all();
+
+        $loginDTO = new LoginDTO(
+            $request->email,
+            $request->password
+        );
+
+        return $this->loginService->login($loginDTO);
     }
 }

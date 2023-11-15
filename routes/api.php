@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::controller(UserController::class)->group(function() {
+Route::middleware(['auth:sanctum'])->controller(UserController::class)->group(function() {
     Route::get('/users', 'index');
     Route::post('/users', 'store');
-    Route::put('/users', 'update');
-    Route::delete('/users', 'delete');
+    Route::put('/users/{id}', 'update');
+    Route::delete('/users/{id}', 'destroy');
 });
 
 Route::controller(AuthController::class)->group(function() {

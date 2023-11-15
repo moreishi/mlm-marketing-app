@@ -7,15 +7,13 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Services\UserService;
 use App\DTO\UserDTO;
+use App\Models\User;
 use App\Http\Requests\UserCreateRequest;
-
-
 
 class UserController extends Controller
 {
 
     public $userRepository;
-
     public $userService;
 
     public function __construct(
@@ -39,8 +37,13 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(UserCreateRequest $request)
-    {
-        $userDTO = new UserDTO();
+    {        
+        $userDTO = new UserDTO(
+            $request->first_name,
+            $request->last_name,
+            $request->email,
+        );
+
         return $this->userService->create($userDTO);
     }
 
@@ -57,7 +60,12 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $userDTO = new UserDTO();
+        $userDTO = new UserDTO(
+            $request->first_name,
+            $request->last_name,
+            $request->email
+        );
+        
         $userDTO->id = $id;
 
         return $this->userService->update($userDTO);
