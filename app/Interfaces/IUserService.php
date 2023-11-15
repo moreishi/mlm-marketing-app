@@ -10,7 +10,7 @@ interface IUserService {
     
     public function create(UserDTO $userDTO) : User;
 
-    public function update(UserDTO $userDTO) : User;
+    public function update(UserDTO $userDTO);
 
     public function delete(int $userId);
 
