@@ -8,28 +8,26 @@ use Tests\Feature\UserBaseTest;
 
 class UserReadTest extends UserBaseTest
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_get_uri(): void
-    {
-        $response = $this->get('/api/users');
 
-        $response->assertStatus(200);
-    }
-
-    /**
-     * A basic feature test example.
-     */
     public function test_get_response_structure(): void
     {
-        $response = $this->get('/api/users');
+        $response = $this->get(UserBaseTest::HTTP_API_USERS);
 
         $response->assertStatus(200);
-        // $content = $response->content();
         
-        // $this->assertEquals($content->id, 1);
-        // $this->assertEquals($content->name, '');
-        // $this->assertEquals($content->email, 'email');
+        $content = json_decode($response->content());
+        $record = $content[0];
+        
+        $this->assertIsArray($content);
+
+        $this->assertNotNull($record->id);
+        $this->assertNotNull($record->first_name);
+        $this->assertNotNull($record->last_name);
+        $this->assertNotNull($record->email);
+
+        $this->assertObjectHasProperty('id', $record);
+        $this->assertObjectHasProperty('first_name', $record);
+        $this->assertObjectHasProperty('last_name', $record);
+        $this->assertObjectHasProperty('email', $record);
     }
 }

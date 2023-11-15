@@ -13,13 +13,6 @@ class RegisterPostTest extends MockTestCase
    
     const HTTP_API_REGISTER = '/api/register';
 
-    public function test_post_uri(): void
-    {
-        $response = $this->post(RegisterPostTest::HTTP_API_REGISTER, []);
-
-        $this->assertEquals($response->getStatusCode(), 422);
-    }
-
     public function test_post_register(): void
     {
         

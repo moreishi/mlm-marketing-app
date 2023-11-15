@@ -9,7 +9,7 @@ use App\Models\User;
 
 class UserBaseTest extends MockTestCase
 {
-    const HTTP_API_TASKS = '/api/users';
+    const HTTP_API_USERS = '/api/users';
     const HTTP_API_LOGIN = '/api/login';
     const HTTP_API_REGISTER = '/api/register';
 
