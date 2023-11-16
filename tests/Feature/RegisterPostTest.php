@@ -34,6 +34,10 @@ class RegisterPostTest extends MockTestCase
         $this->assertObjectHasProperty('access_token', $content);
         $this->assertObjectHasProperty('token_type', $content);
 
+        $this->assertNotNull($content->user);
+        $this->assertNotNull($content->access_token);
+        $this->assertNotNull($content->token_type);
+
     }
 
 }
